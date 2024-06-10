@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Builder App</title>
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body class="min-h-[1500px]">
+    <main class="max-w-[600px] bg-red-100 min-h-[700px] mx-auto mt-10">
+      <section
+        id="hero-section"
+        class="bg-cover max-w-[600px] flex justify-center items-center h-[300px] mb-5"
+        style="
+          background-image: url('./img/image.png');
+          background-repeat: no-repeat;
+        "
+      >
+        <div class="text-center w-[300px]">
+          <h1 class="text-3xl font-bold text-stone-950 mb-4">
+            Welcome To My List Builder
+          </h1>
+          <p class="text-center font-serif text-xs text-stone-800">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
+            cum nulla eius excepturi, sed ipsam voluptatem quia dolorem mollitia
+          </p>
+        </div>
+      </section>
+
+      <section id="working-section" class="px-10 max-w-[600px]">
+        <div id="input-box" class="flex justify-between mb-5">
+          <input
+            type="text"
+            id="task-input"
+            class="flex-grow pl-3 focus-visible:outline-none border border-stone-900"
+            placeholder="The tasks you have to do....."
+          />
+          <button id="add-task-btn" class="bg-stone-900 text-stone-50 p-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+          </button>
+        </div>
+        <div id="task-list" class="flex justify-between">
+          <h3 class="text-xl font-bold">Your Tasks</h3>
+          <div
+            class="bg-stone-950 rounded-full text-stone-50 flex justify-center items-center px-3 py-1"
+          >
+            <span id="done-task-total">0</span>
+            <span>/</span>
+            <span id="task-total">0</span>
+          </div>
+        </div>
+
+        <div id="list-group" class="mt-5">
+          <div class="hidden last:block">
+            <p class="font-mono text-xl flex justify-center mt-10">
+              There is no task yet!!!
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
