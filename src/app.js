@@ -18,7 +18,7 @@ const createNewList = (currentTask) => {
       <p class="font-mono list-para">${currentTask}</p>
     </div>
     <div class="flex items-center gap-2">
-      <button class="border-2 edit-btn border-stone-900 p-1">
+      <button class="border edit-btn border-stone-900 p-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -34,7 +34,7 @@ const createNewList = (currentTask) => {
           />
         </svg>
       </button>
-      <button class="border-2 delete-btn border-stone-900 p-1">
+      <button class="border delete-btn border-stone-900 p-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -52,49 +52,50 @@ const createNewList = (currentTask) => {
       </button>
     </div>
   </div>`;
-  const listDoneCheck = list.querySelector(".list-done-check");
-  const listPara = list.querySelector(".list-para");
-  const deleteBtn = list.querySelector(".delete-btn");
-  const editBtn = list.querySelector(".edit-btn");
 
-  listDoneCheck.addEventListener("change", () => {
-    if (listDoneCheck.checked) {
-      editBtn.setAttribute("disabled", true);
-    } else {
-      editBtn.removeAttribute("disabled");
-    }
-    listDoneTotal();
-    listPara.classList.toggle("line-through");
-    list.classList.add("duration-300");
-    list.classList.toggle("scale-75");
-    list.classList.toggle("opacity-20");
-  });
+  // const listDoneCheck = list.querySelector(".list-done-check");
+  // const listPara = list.querySelector(".list-para");
+  // const deleteBtn = list.querySelector(".delete-btn");
+  // const editBtn = list.querySelector(".edit-btn");
 
-  deleteBtn.addEventListener("click", () => {
-    if (window.confirm("Are you sure to delete")) {
-      list.remove();
-      updateTaskList();
-      listDoneTotal();
-    }
-  });
+  // listDoneCheck.addEventListener("change", () => {
+  //   if (listDoneCheck.checked) {
+  //     editBtn.setAttribute("disabled", true);
+  //   } else {
+  //     editBtn.removeAttribute("disabled");
+  //   }
+  //   listDoneTotal();
+  //   listPara.classList.toggle("line-through");
+  //   list.classList.add("duration-300");
+  //   list.classList.toggle("scale-75");
+  //   list.classList.toggle("opacity-20");
+  // });
 
-  editBtn.addEventListener("click", () => {
-    editBtn.setAttribute("disabled", true);
-    const newTaskInput = document.createElement("input");
-    newTaskInput.className =
-      "border border-stone-900 pl-2 focus-visible:outline-none";
-    listPara.after(newTaskInput);
-    listPara.classList.add("hidden");
-    newTaskInput.value = listPara.innerText;
-    newTaskInput.focus();
+  // deleteBtn.addEventListener("click", () => {
+  //   if (window.confirm("Are you sure to delete")) {
+  //     list.remove();
+  //     updateTaskList();
+  //     listDoneTotal();
+  //   }
+  // });
 
-    newTaskInput.addEventListener("change", () => {
-      editBtn.removeAttribute("disabled");
-      listPara.innerText = newTaskInput.value;
-      listPara.classList.remove("hidden");
-      newTaskInput.remove();
-    });
-  });
+  // editBtn.addEventListener("click", () => {
+  //   editBtn.setAttribute("disabled", true);
+  //   const newTaskInput = document.createElement("input");
+  //   newTaskInput.className =
+  //     "border border-stone-900 pl-2 focus-visible:outline-none";
+  //   listPara.after(newTaskInput);
+  //   listPara.classList.add("hidden");
+  //   newTaskInput.value = listPara.innerText;
+  //   newTaskInput.focus();
+
+  //   newTaskInput.addEventListener("change", () => {
+  //     editBtn.removeAttribute("disabled");
+  //     listPara.innerText = newTaskInput.value;
+  //     listPara.classList.remove("hidden");
+  //     newTaskInput.remove();
+  //   });
+  // });
 
   return list;
 };
@@ -123,3 +124,58 @@ addTaskBtn.addEventListener("click", () => {
   //to add new list
   addList();
 });
+
+const listGroupHandler = (event) => {
+  // console.log(event.target);
+  // console.log(event.target.closest(".list"));
+  // console.log(event.target.classList.contains("delete-btn"));
+
+  const list = event.target.closest(".list");
+
+  //Selectors From The List
+  const listDoneCheck = list.querySelector(".list-done-check");
+  const listPara = list.querySelector(".list-para");
+  const deleteBtn = list.querySelector(".delete-btn");
+  const editBtn = list.querySelector(".edit-btn");
+
+  if (event.target.classList.contains("list-done-check")) {
+    if (listDoneCheck.checked) {
+      editBtn.setAttribute("disabled", true);
+    } else {
+      editBtn.removeAttribute("disabled");
+    }
+    listDoneTotal();
+    listPara.classList.toggle("line-through");
+    list.classList.add("duration-300");
+    list.classList.toggle("scale-75");
+    list.classList.toggle("opacity-20");
+  }
+
+  if (event.target.classList.contains("delete-btn")) {
+    if (window.confirm("Are you sure to delete")) {
+      list.remove();
+      updateTaskList();
+      listDoneTotal();
+    }
+  }
+
+  if (event.target.classList.contains("edit-btn")) {
+    editBtn.setAttribute("disabled", true);
+    const newTaskInput = document.createElement("input");
+    newTaskInput.className =
+      "border border-stone-900 pl-2 focus-visible:outline-none";
+    listPara.after(newTaskInput);
+    listPara.classList.add("hidden");
+    newTaskInput.value = listPara.innerText;
+    newTaskInput.focus();
+
+    newTaskInput.addEventListener("change", () => {
+      editBtn.removeAttribute("disabled");
+      listPara.innerText = newTaskInput.value;
+      listPara.classList.remove("hidden");
+      newTaskInput.remove();
+    });
+  }
+};
+//Listen Event On The Parent listGroup
+listGroup.addEventListener("click", listGroupHandler);
